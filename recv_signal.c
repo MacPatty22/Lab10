@@ -1,6 +1,6 @@
 /*********************************************************************
 * @file recv_signal.c
-* @brief Lab 10 Signals - receives SIGUSR1 and prints the integer sent with it
+* @brief receives SIGUSR1 and prints the integer sent with it
 * @author Mac Patterson
 * @date 11/05/2026
 *********************************************************************/
@@ -10,19 +10,15 @@
 #include <string.h>
 #include <unistd.h>
 
-/**
- * @brief Prints the integer that was sent along with the signal.
- * @param sig the signal number (unused)
- * @param info details about the signal, including the sent value
- * @param context the saved process context (unused)
- */
-void handle_usr1(int sig, siginfo_t *info, void *context) {
+void handle_usr1(int sig, siginfo_t *info, void *context)
+{
     (void)sig;
     (void)context;
     printf("Received value: %d\n", info->si_value.sival_int);
 }
 
-int main(void) {
+int main(void)
+{
     struct sigaction action;
 
     // Use the three argument handler, which requires SA_SIGINFO
@@ -31,17 +27,16 @@ int main(void) {
     action.sa_flags = SA_SIGINFO;
     sigemptyset(&action.sa_mask);
 
-    if (sigaction(SIGUSR1, &action, NULL) == -1) {
+    if (sigaction(SIGUSR1, &action, NULL) == -1)
+    {
         perror("sigaction");
         return EXIT_FAILURE;
     }
 
     printf("My PID is %d\n", getpid());
-
-    // Wait forever
-    while (1) {
+    while (1)
+    {
         sleep(1);
     }
-
     return 0;
 }

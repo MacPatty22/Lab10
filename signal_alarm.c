@@ -11,12 +11,14 @@
 // Set by the handler so main knows the alarm has fired
 static volatile sig_atomic_t alarm_fired = 0;
 
-void handle_alarm(int sig) {
+void handle_alarm(int sig)
+{
     printf("Received SIGALRM (signal %d)\n", sig);
     alarm_fired = 1;
 }
 
-int main(void) {
+int main(void)
+{
     // Register the handler before scheduling the alarm
     signal(SIGALRM, handle_alarm);
 
@@ -26,12 +28,15 @@ int main(void) {
 
     // Count down each second until the alarm has been handled
     int remaining = 5;
-    while (!alarm_fired) {
-        if (remaining > 0) {
+    while (!alarm_fired)
+    {
+        if (remaining > 0)
+        {
             printf("%d...\n", remaining);
             remaining--;
         }
         sleep(1);
     }
+
     return 0;
 }

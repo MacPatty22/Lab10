@@ -11,15 +11,18 @@
 #include <time.h>
 #include <unistd.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     // The receiver's PID changes each run, so take it from the command line
-    if (argc != 2) {
+    if (argc != 2)
+    {
         fprintf(stderr, "Usage: %s <receiver pid>\n", argv[0]);
         return EXIT_FAILURE;
     }
 
     pid_t receiver = atoi(argv[1]);
-    if (receiver <= 0) {
+    if (receiver <= 0)
+    {
         fprintf(stderr, "Invalid PID: %s\n", argv[1]);
         return EXIT_FAILURE;
     }
@@ -31,9 +34,11 @@ int main(int argc, char *argv[]) {
     union sigval value;
     memset(&value, 0, sizeof(value));
     value.sival_int = rand();
+
     printf("Sending value: %d\n", value.sival_int);
 
-    if (sigqueue(receiver, SIGUSR1, value) == -1) {
+    if (sigqueue(receiver, SIGUSR1, value) == -1)
+    {
         perror("sigqueue");
         return EXIT_FAILURE;
     }

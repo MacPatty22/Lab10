@@ -10,13 +10,15 @@
 #include <string.h>
 #include <unistd.h>
 
-void handle_usr1(int sig, siginfo_t *info, void *context) {
+void handle_usr1(int sig, siginfo_t *info, void *context)
+{
     (void)sig;
     (void)context;
     printf("Received SIGUSR1 from PID %d\n", info->si_pid);
 }
 
-int main(void) {
+int main(void)
+{
     struct sigaction action;
 
     // Use the three argument handler, which requires SA_SIGINFO
@@ -25,14 +27,15 @@ int main(void) {
     action.sa_flags = SA_SIGINFO;
     sigemptyset(&action.sa_mask);
 
-    if (sigaction(SIGUSR1, &action, NULL) == -1) {
+    if (sigaction(SIGUSR1, &action, NULL) == -1)
+    {
         perror("sigaction");
         return EXIT_FAILURE;
     }
-    printf("My PID is %d\n", getpid());
 
-    // Wait forever
-    while (1) {
+    printf("My PID is %d\n", getpid());
+    while (1)
+    {
         sleep(1);
     }
     return 0;

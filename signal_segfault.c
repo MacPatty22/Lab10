@@ -7,13 +7,14 @@
 #include <signal.h>
 #include <stdio.h>
 
-
-void handle_segv(int sig) {
+void handle_segv(int sig)
+{
     (void)sig;
     printf("Segmentation fault received\n");
 }
 
-int main (int argc, char* argv[]) {
+int main (int argc, char* argv[])
+{
     (void)argc;
     (void)argv;
 

@@ -8,21 +8,25 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void handle_signal(int sig) {
+void handle_signal(int sig)
+{
     (void)sig;
     printf("Received a signal\n");
 }
 
-int main(void) {
+int main(void)
+{
     // Register the handler for SIGINT
     signal(SIGINT, handle_signal);
 
     printf("My PID is %d\n", getpid());
 
     // Wait forever
-    while (1) {
+    while (1)
+    {
         printf("Sleeping\n");
         sleep(1);
     }
+
     return 0;
 }
